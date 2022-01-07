@@ -10,7 +10,8 @@ Board::Board(int size) {
     this->size = size;
 }
 
-bool Board::placePiece(int index, Piece piece) {
+bool Board::placePiece(Piece piece) {
+    int index = board.size();
     int row = index / size;
     if (row == 0) {                         // si la piece à placer se trouver sur la premiere ligne
 

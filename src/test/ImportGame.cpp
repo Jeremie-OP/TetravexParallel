@@ -2,6 +2,7 @@
 #include <iostream>
 #include "ImportGame.h"
 
+
 Game* ImportGame::readFile(string file) {
     cout << "Chargement du fichier: " << file << endl;
 

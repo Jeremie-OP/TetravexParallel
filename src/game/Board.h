@@ -11,5 +11,5 @@ private:
 public:
     Board(int size);
     ~Board();
-    bool placePiece(int index, Piece piece);
+    bool placePiece(Piece piece);
 };
