@@ -8,8 +8,14 @@ private:
     int top, bot, left, right;
     /* data */
 public:
-    Piece(int _top, int _bot, int _left, int _right);
+    Piece(int _left, int _top, int _right, int _bot);
     void setPlaced();
     bool isPlaced();
+
+    int getLeft() { return left; }
+    int getRight() { return right; }
+    int getTop() { return top; }
+    int getBot() { return bot; }
+
 
 };

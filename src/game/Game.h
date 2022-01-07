@@ -7,9 +7,10 @@ class Game
 private:
     Board* board;
     int size;
+    vector<Piece> listePiece;
 public:
-    Game(/* args */);
-    ~Game();
+    Game(int _size);
     int getSize() {return size;}
+    void addPiece(Piece piece) { listePiece.push_back(piece);}
     
 };

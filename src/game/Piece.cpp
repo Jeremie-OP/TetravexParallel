@@ -1,11 +1,11 @@
 #include "Piece.h"
 
-Piece::Piece(int left, int top, int right, int bot) {
-    this->left = left;
-    this->top = top;
-    this->right = right;
-    this->bot = bot;
-    this->placed = false;
+Piece::Piece(int _left, int _top, int _right, int _bot) {
+    left = _left;
+    top = _top;
+    right = _right;
+    bot = _bot;
+    placed = false;
 }
 
 bool Piece::isPlaced() {

@@ -1,3 +1,4 @@
+#include "../game/Game.h"
 
 using namespace std;
 
@@ -6,7 +7,5 @@ class ImportGame
 private:
     /* data */
 public:
-    ImportGame(/* args */);
-    ~ImportGame();
-    void readFile(string file);
+    static Game* readFile(string file);
 };

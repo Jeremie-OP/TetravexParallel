@@ -7,7 +7,7 @@ using namespace std;
 class Board{
 private:
     int size;
-    vector<Piece*> board;
+    vector<Piece> board;
 public:
     Board(int size);
     ~Board();
