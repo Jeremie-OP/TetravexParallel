@@ -1,13 +1,15 @@
 #include <vector>
-#include "Element.h"
+#include "Piece.h"
+
 
 using namespace std;
 
 class Board{
 private:
     int size;
-    vector<vector <Element*>> board;
+    vector<Piece*> board;
 public:
-    Board();
+    Board(int size);
     ~Board();
+    bool placePiece(int index, Piece piece);
 };

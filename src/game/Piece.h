@@ -1,16 +1,15 @@
 
 using namespace std;
 
-class Element
+class Piece
 {
 private:
     bool placed;
     int top, bot, left, right;
     /* data */
 public:
-    Element(int _top, int _bot, int _left, int _right);
-    ~Element();
-    void setPlaced(bool _placed);
+    Piece(int _top, int _bot, int _left, int _right);
+    void setPlaced();
     bool isPlaced();
 
 };

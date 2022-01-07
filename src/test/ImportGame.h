@@ -8,5 +8,5 @@ private:
 public:
     ImportGame(/* args */);
     ~ImportGame();
-    
+    void readFile(string file);
 };
