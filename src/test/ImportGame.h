@@ -7,5 +7,5 @@ class ImportGame
 private:
     /* data */
 public:
-    static Game* readFile(string file);
+    static Game readFile(string file);
 };

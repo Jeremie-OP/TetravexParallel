@@ -4,19 +4,34 @@
 
 #include "SequentialResolver.h"
 
-Game SequentialResolver::resolve(Game game) {
-    pieceToPlay = game.getPieces();
-    return game;
+
+
+SequentialResolver::SequentialResolver(Game _game) {
+    game = &_game;
+    pieceNotPlayed = game->getPieces();
+    currentIndex = 0;
+    this->resolve(&pieceNotPlayed);
 }
 
-bool SequentialResolver::solver(Game* game) {
-    pieceNotPlayed = pieceToPlay;
-    for (auto &&p : pieceToPlay) {
-        if (game->placePiece(p)) {
-
+bool SequentialResolver::resolve(vector<Piece*>* listPieces) {
+    if (pieceNotPlayed.empty()) {
+        cout << "J'ai ! " << endl;
+        game->showBoard();
+        return true;
+    }
+    for (int i = 0; i < pieceNotPlayed.size(); i++) {
+        if (game->placePiece(pieceNotPlayed[i])) {
+            piecePlayed.push_back(pieceNotPlayed[i]);
+            pieceNotPlayed.erase(pieceNotPlayed.begin() + i);
+//            i--;
+            if (!resolve(listPieces)) {
+                game->removePiece();
+                pieceNotPlayed.insert(pieceNotPlayed.begin() + i,piecePlayed.back());
+                piecePlayed.pop_back();
+            } else return true;
         }
     }
-
     return false;
-
 }
+
+

@@ -5,11 +5,18 @@ Game::Game(int _size) {
     board = new Board(size);
 }
 
-bool Game::placePiece(Piece piece) {
+bool Game::placePiece(Piece* piece) {
     return board->placePiece(piece);
 }
 
-vector<Piece> Game::getPieces() {
-    return listePiece;
+bool Game::gameDone() {
+    for (Piece* p : listePiece) {
+        if (!p->isPlaced()) return false;
+    }
+    return true;
+}
+
+void Game::removePiece() {
+    board->enleverPiece();
 }
 

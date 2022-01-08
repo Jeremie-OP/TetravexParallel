@@ -7,11 +7,3 @@ Piece::Piece(int _left, int _top, int _right, int _bot) {
     bot = _bot;
     placed = false;
 }
-
-bool Piece::isPlaced() {
-    return this->placed;
-}
-
-void Piece::setPlaced() {
-    (placed) ? placed = false : placed = true;
-}

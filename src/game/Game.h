@@ -11,14 +11,19 @@ class Game
 private:
     Board* board;
     int size;
-    vector<Piece> listePiece;
+    vector<Piece*> listePiece;
 public:
-    Game(int _size);
-    int getSize() {return size;}
-    void addPiece(Piece piece) { listePiece.push_back(piece);}
-    bool placePiece(Piece piece);
+    explicit Game(int _size);
+    int getSize() const {return size;}
+    void addPiece(Piece* piece) { listePiece.push_back(piece);}
+    bool placePiece(Piece* piece);
+    void removePiece();
 
-    vector<Piece> getPieces();
+    void showBoard() { board->show();}
+
+    bool gameDone();
+
+    vector<Piece*> getPieces() { return listePiece;};
 };
 
-#endif TETRAVEX_GAME_H
+#endif //TETRAVEX_GAME_H

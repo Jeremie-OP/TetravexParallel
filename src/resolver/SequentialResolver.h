@@ -2,6 +2,7 @@
 // Created by wiakx on 07/01/2022.
 //
 #include "vector"
+#include <iostream>
 #include "../game/Game.h"
 
 #ifndef TETRAVEX_SEQUENTIALRESOLVER_H
@@ -10,10 +11,12 @@
 
 class SequentialResolver {
     private:
-        vector<Piece> pieceToPlay, piecePlayed, pieceNotPlayed;
+        vector<Piece*> piecePlayed, pieceNotPlayed;
+        Game* game;
+        int currentIndex;
     public:
-        Game resolve(Game game);
-        bool solver(Game* game);
+        SequentialResolver(Game _game);
+        bool resolve(vector<Piece*>* listePieces);
 };
 
 

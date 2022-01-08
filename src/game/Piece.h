@@ -11,8 +11,9 @@ private:
     /* data */
 public:
     Piece(int _left, int _top, int _right, int _bot);
-    void setPlaced();
-    bool isPlaced();
+    void placePiece() { placed = true;}
+    void removePiece() { placed = false;}
+    bool isPlaced(){ return placed; }
 
     int getLeft() { return left; }
     int getRight() { return right; }
@@ -21,4 +22,4 @@ public:
 
 };
 
-#endif TETRAVEX_PIECE_H
+#endif //TETRAVEX_PIECE_H
