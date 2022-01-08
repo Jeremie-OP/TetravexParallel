@@ -15,26 +15,13 @@ Board::Board(int size) {
 bool Board::placePiece(Piece* piece) {
     int index = board.size();
     int row = index / size;
-    if (row == 0) {                         // si la piece à placer se trouver sur la premiere ligne
-
-    } else {                                  //si la piece se trouve sur une autre ligne
-        if (board[index - size]->getBot() != piece->getTop()) return false;
-    }
+    if (row != 0 && board[index - size]->getBot() != piece->getTop()) return false; //on verifie à partir de la seconde ligne si la valeur top de la piece est valide
 
     int column = index - size * row;
-    if (column == 0) {                      //si la piece se trouve sur la premiere colonne
+    if (column != 0 && board[index - 1]->getRight() != piece->getLeft()) return false; //on verifie à partir de la seconde colonne si la valeur gauche de la piece est valide
 
-    } else {                                //si la piece se trouve sur une autre colonne
-        if (board[index - 1]->getRight() != piece->getLeft()) return false;
-    }
-    piece->placePiece();
-    board.push_back(piece);
+    board.push_back(piece);     //la piece peut etre utilisé, on l'ajoute au tableau
     return true;
-}
-
-void Board::enleverPiece() {
-    board.back()->removePiece();
-    board.pop_back();
 }
 
 

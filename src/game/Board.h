@@ -12,9 +12,8 @@ private:
     vector<Piece*> board;
 public:
     Board(int size);
-    ~Board();
     bool placePiece(Piece* piece);       //place une piece sur le prochain emplacement possible
-    void enleverPiece();    //enleve la piece du dernier emplacement
+    void enleverPiece() {board.pop_back();}    //enleve la piece du dernier emplacement
     void show();
 };
 

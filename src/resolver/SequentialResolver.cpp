@@ -11,13 +11,13 @@ SequentialResolver::SequentialResolver(Game _game) {
     size = game->getSize();
     size = size * size;
     pieceNotPlayed = game->getPieces();
-    currentIndex = 0;
+    start = chrono::high_resolution_clock::now();
     this->resolve(&pieceNotPlayed,0,0);
 }
 
 bool SequentialResolver::resolve(vector<Piece*>* listPieces, int numberOfPlayedPiece, int newI) {
     if (numberOfPlayedPiece >= size) {
-        cout << "J'ai ! " << endl;
+        cout << "resolved in " << chrono::duration_cast<chrono::duration<double>>(chrono::high_resolution_clock::now() - start).count() << "s"<<endl;;
         game->showBoard();
         return true;
     }

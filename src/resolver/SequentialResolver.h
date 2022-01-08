@@ -3,6 +3,7 @@
 //
 #include "vector"
 #include <iostream>
+#include <chrono>
 #include "../game/Game.h"
 
 #ifndef TETRAVEX_SEQUENTIALRESOLVER_H
@@ -14,7 +15,7 @@ class SequentialResolver {
         vector<Piece*> piecePlayed, pieceNotPlayed;
         Game* game;
         int size;
-        int currentIndex;
+        chrono::high_resolution_clock::time_point start;
     public:
         SequentialResolver(Game _game);
         bool resolve(vector<Piece*>* listePieces, int numberOfPlayedPiece, int newI);

@@ -21,8 +21,6 @@ public:
 
     void showBoard() { board->show();}
 
-    bool gameDone();
-
     vector<Piece*> getPieces() { return listePiece;};
 };
 
