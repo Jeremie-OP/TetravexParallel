@@ -1,6 +1,8 @@
 #include <vector>
 #include "Piece.h"
 
+#ifndef TETRAVEX_BOARD_H
+#define TETRAVEX_BOARD_H
 
 using namespace std;
 
@@ -13,3 +15,5 @@ public:
     ~Board();
     bool placePiece(Piece piece);
 };
+
+#endif TETRAVEX_BOARD_H

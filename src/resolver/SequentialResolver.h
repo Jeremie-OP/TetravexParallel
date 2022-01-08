@@ -2,8 +2,6 @@
 // Created by wiakx on 07/01/2022.
 //
 #include "vector"
-#include "../game/Piece.h"
-#include "../game/Board.h"
 #include "../game/Game.h"
 
 #ifndef TETRAVEX_SEQUENTIALRESOLVER_H

@@ -6,6 +6,7 @@
 
 Game SequentialResolver::resolve(Game game) {
     pieceToPlay = game.getPieces();
+    return game;
 }
 
 bool SequentialResolver::solver(Game* game) {

@@ -1,5 +1,9 @@
 #include "Board.h"
 
+#ifndef TETRAVEX_GAME_H
+#define TETRAVEX_GAME_H
+
+
 using namespace std;
 
 class Game
@@ -16,3 +20,5 @@ public:
 
     vector<Piece> getPieces();
 };
+
+#endif TETRAVEX_GAME_H
