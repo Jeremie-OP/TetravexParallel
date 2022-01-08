@@ -13,10 +13,11 @@ class SequentialResolver {
     private:
         vector<Piece*> piecePlayed, pieceNotPlayed;
         Game* game;
+        int size;
         int currentIndex;
     public:
         SequentialResolver(Game _game);
-        bool resolve(vector<Piece*>* listePieces);
+        bool resolve(vector<Piece*>* listePieces, int numberOfPlayedPiece, int newI);
 };
 
 

@@ -8,28 +8,31 @@
 
 SequentialResolver::SequentialResolver(Game _game) {
     game = &_game;
+    size = game->getSize();
+    size = size * size;
     pieceNotPlayed = game->getPieces();
     currentIndex = 0;
-    this->resolve(&pieceNotPlayed);
+    this->resolve(&pieceNotPlayed,0,0);
 }
 
-bool SequentialResolver::resolve(vector<Piece*>* listPieces) {
-    if (pieceNotPlayed.empty()) {
+bool SequentialResolver::resolve(vector<Piece*>* listPieces, int numberOfPlayedPiece, int newI) {
+    if (numberOfPlayedPiece >= size) {
         cout << "J'ai ! " << endl;
         game->showBoard();
         return true;
     }
-    for (int i = 0; i < pieceNotPlayed.size(); i++) {
+    int oldI;
+    if (newI == 0) newI = pieceNotPlayed.size() - 1;
+    for (int i = 0; i <= newI; ) {
         if (game->placePiece(pieceNotPlayed[i])) {
-            piecePlayed.push_back(pieceNotPlayed[i]);
-            pieceNotPlayed.erase(pieceNotPlayed.begin() + i);
-//            i--;
-            if (!resolve(listPieces)) {
+            oldI = i;
+            swap(pieceNotPlayed[oldI],pieceNotPlayed[newI]);
+            if (!resolve(listPieces, numberOfPlayedPiece + 1, newI -1)) {
                 game->removePiece();
-                pieceNotPlayed.insert(pieceNotPlayed.begin() + i,piecePlayed.back());
-                piecePlayed.pop_back();
+                swap(pieceNotPlayed[oldI],pieceNotPlayed[newI]);
+                i++;
             } else return true;
-        }
+        } else i++;
     }
     return false;
 }
