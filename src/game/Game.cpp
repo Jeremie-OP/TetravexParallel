@@ -13,3 +13,11 @@ void Game::removePiece() {
     board->enleverPiece();
 }
 
+Game Game::gameCopy() {
+    Game gameCopy(this->getSize());
+    for (Piece* p : this->listePiece) {
+        gameCopy.addPiece(p);
+    }
+    return gameCopy;
+}
+

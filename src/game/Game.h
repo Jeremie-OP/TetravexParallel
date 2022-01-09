@@ -21,6 +21,8 @@ public:
 
     void showBoard() { board->show();}
 
+    Game gameCopy();
+
     vector<Piece*> getPieces() { return listePiece;};
 };
 
