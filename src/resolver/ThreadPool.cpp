@@ -36,7 +36,6 @@ void ThreadPool::initializeSolver(Game game) {
         Game* gameTmp = new Game(game.gameCopy());
         game.swapPieces(0,i);
         tabOfSolver.emplace_back(ParallelResolver(*gameTmp, &atom));
-        vector<Piece *> list = game.getPieces();
         addThreadPool(new thread(&ParallelResolver::initializerSolver,tabOfSolver.back()));
     }
     while (!atom) {
@@ -46,13 +45,11 @@ void ThreadPool::initializeSolver(Game game) {
                 Game* gameTmp = new Game(game.gameCopy());
                 game.swapPieces(0,i);
                 tabOfSolver.emplace_back(ParallelResolver(*gameTmp, &atom));
-                vector<Piece *> list = game.getPieces();
                 t = new thread(&ParallelResolver::initializerSolver,tabOfSolver.back());
                 i++;
             }
         }
     }
-    killThreads();
 
 }
 
@@ -67,7 +64,6 @@ void ThreadPool::initializeSolverShuffle(Game game) {
         Game* gameTmp = new Game(game.gameCopy());
         gameTmp->shufflePieces();
         tabOfSolver.emplace_back(ParallelResolver(*gameTmp, &atom));
-        vector<Piece *> list = game.getPieces();
         addThreadPool(new thread(&ParallelResolver::initializerSolverShuffled,tabOfSolver.back()));
     }
     while (!atom) {
@@ -77,13 +73,11 @@ void ThreadPool::initializeSolverShuffle(Game game) {
                 Game* gameTmp = new Game(game.gameCopy());
                 gameTmp->shufflePieces();
                 tabOfSolver.emplace_back(ParallelResolver(*gameTmp, &atom));
-                vector<Piece *> list = game.getPieces();
                 t = new thread(&ParallelResolver::initializerSolverShuffled,tabOfSolver.back());
                 i++;
             }
         }
     }
-    killThreads();
 
 }
 
