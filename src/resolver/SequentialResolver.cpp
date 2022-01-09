@@ -12,26 +12,49 @@ SequentialResolver::SequentialResolver(Game _game) {
     size = size * size;
     pieceNotPlayed = game->getPieces();
     start = chrono::high_resolution_clock::now();
-    this->resolve(&pieceNotPlayed,0,0);
 }
 
-bool SequentialResolver::resolve(vector<Piece*>* listPieces, int numberOfPlayedPiece, int newI) {
-    if (numberOfPlayedPiece >= size) {
-        cout << "resolved in " << chrono::duration_cast<chrono::duration<double>>(chrono::high_resolution_clock::now() - start).count() << "s"<<endl;;
-        game->showBoard();
-        return true;
+bool SequentialResolver::resolveP(Game &game, int numberOfPlayedPiece, int newI) {
+    if (numberOfPlayedPiece >= size) {  //si le nombre de piece joué correpond au nombre de piece à placer alors c'est qu'on a la solution
+        cout << "resolved in " << chrono::duration_cast<chrono::duration<double>>(chrono::high_resolution_clock::now() - start).count() << "s"<<endl;;  //on affiche le temps
+        game.showBoard();  //on affiche la board
+        return true;    //on sort de la recursivité
     }
     int oldI;
-    if (newI == 0) newI = pieceNotPlayed.size() - 1;
+    if (newI == 0) newI = game.getPieces().size() - 1;
+    for (int i = 0; i <= newI; ) {
+        if (game.placePiece(pieceNotPlayed[i])) {
+            oldI = i;
+            swap(pieceNotPlayed[oldI],pieceNotPlayed[newI]);            //si la piece est utilisé on la swap avec la derniere piece non swap de fond du vecteur
+            if (!resolve(numberOfPlayedPiece + 1, newI -1)) {
+                game.removePiece();                                           //la piece n'est pas la bonne, on l'enleve de la board
+                swap(pieceNotPlayed[oldI],pieceNotPlayed[newI]);        //on remet la piece à son emplacement d'origine dans le vecteur
+                i++;
+            } else return true;     //c'est tout bon, on sort de la recursivité
+        } else i++;
+    }
+    return false;
+}
+
+
+bool SequentialResolver::resolve(int numberOfPlayedPiece, int newI) {
+
+    if (numberOfPlayedPiece >= size) {  //si le nombre de piece joué correpond au nombre de piece à placer alors c'est qu'on a la solution
+        cout << "resolved in " << chrono::duration_cast<chrono::duration<double>>(chrono::high_resolution_clock::now() - start).count() << "s"<<endl;;  //on affiche le temps
+        game->showBoard();  //on affiche la board
+        return true;    //on sort de la recursivité
+    }
+    int oldI;
+    if (newI == 0) newI = game->getPieces().size() - 1;
     for (int i = 0; i <= newI; ) {
         if (game->placePiece(pieceNotPlayed[i])) {
             oldI = i;
-            swap(pieceNotPlayed[oldI],pieceNotPlayed[newI]);
-            if (!resolve(listPieces, numberOfPlayedPiece + 1, newI -1)) {
-                game->removePiece();
-                swap(pieceNotPlayed[oldI],pieceNotPlayed[newI]);
+            swap(pieceNotPlayed[oldI],pieceNotPlayed[newI]);            //si la piece est utilisé on la swap avec la derniere piece non swap de fond du vecteur
+            if (!resolve(numberOfPlayedPiece + 1, newI -1)) {
+                game->removePiece();                                           //la piece n'est pas la bonne, on l'enleve de la board
+                swap(pieceNotPlayed[oldI],pieceNotPlayed[newI]);        //on remet la piece à son emplacement d'origine dans le vecteur
                 i++;
-            } else return true;
+            } else return true;     //c'est tout bon, on sort de la recursivité
         } else i++;
     }
     return false;

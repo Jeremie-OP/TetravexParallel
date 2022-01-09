@@ -18,7 +18,8 @@ class SequentialResolver {
         chrono::high_resolution_clock::time_point start;
     public:
         SequentialResolver(Game _game);
-        bool resolve(vector<Piece*>* listePieces, int numberOfPlayedPiece, int newI);
+        bool resolve(int numberOfPlayedPiece, int newI);
+        bool resolveP(Game &game, int numberOfPlayedPiece, int newI);
 };
 
 
