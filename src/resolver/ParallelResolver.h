@@ -9,13 +9,25 @@
 #include <chrono>
 #include "../game/Game.h"
 #include "iostream"
+#include "atomic"
 
 class ParallelResolver {
+private:
+    int size;
+    Game game;
+    atomic<bool>* atom;
+    int loop;
 public:
-    ParallelResolver();
+    ParallelResolver(Game game, atomic<bool>* atom);
     void initializerSolver();
-    bool solver(Game *game, int numberOfPlayedPiece, int newI);
+    bool solver(vector<Piece*> &listPiece , int numberOfPlayedPiece, int newI);
     chrono::high_resolution_clock::time_point start;
+
+    void launch(Game game, vector<Piece *> &listPiece, int i);
+
+    void initializerSolverShuffled();
+
+    bool solverShuffled(vector<Piece *> &listPiece, int numberOfPlayedPiece, int newI);
 };
 
 

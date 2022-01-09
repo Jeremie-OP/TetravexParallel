@@ -3,7 +3,7 @@
 //
 #include "thread"
 #include "vector"
-#include "SequentialResolver.h"
+#include "ParallelResolver.h"
 
 #ifndef TETRAVEX_THREADPOOL_H
 #define TETRAVEX_THREADPOOL_H
@@ -14,6 +14,7 @@ class ThreadPool {
 private:
     vector<thread*> threadPool;
     int numOfThreads;
+    atomic<bool> atom;
 public:
     ThreadPool();
     void addThreadPool(thread* t);
@@ -21,6 +22,8 @@ public:
     void killThreads();
 
     void initializeSolver(Game game);
+
+    void initializeSolverShuffle(Game game);
 };
 
 

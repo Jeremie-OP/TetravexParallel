@@ -12,7 +12,7 @@
 
 class SequentialResolver {
     private:
-        vector<Piece*> piecePlayed, pieceNotPlayed;
+        vector<Piece*> pieceNotPlayed;
         Game* game;
         int size;
         chrono::high_resolution_clock::time_point start;

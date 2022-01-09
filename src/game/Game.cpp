@@ -1,3 +1,6 @@
+#include <algorithm>
+#include <random>
+#include <chrono>
 #include "Game.h"
 
 Game::Game(int _size) {
@@ -23,5 +26,11 @@ Game Game::gameCopy() {
 
 void Game::swapPieces(int x, int y) {
     swap(listePiece[x], listePiece[y]);
+}
+
+void Game::shufflePieces() {
+    unsigned seed = chrono::system_clock::now().time_since_epoch().count();
+    default_random_engine e(seed);
+    shuffle(begin(listePiece), std::end(listePiece), e);
 }
 

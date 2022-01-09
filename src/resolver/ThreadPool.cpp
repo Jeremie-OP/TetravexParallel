@@ -23,14 +23,67 @@ void ThreadPool::killThreads() {
     }
 }
 
+
+
 void ThreadPool::initializeSolver(Game game) {
-    vector<SequentialResolver> tabOfSolver;
-    for (int i=0 ; i < numOfThreads; i++) {
-        tabOfSolver.emplace_back(SequentialResolver(game.gameCopy()));
-        addThreadPool(new thread(&SequentialResolver::resolve,tabOfSolver.back(), i, 0));
+    vector<ParallelResolver> tabOfSolver;
+    atom = new atomic<bool>();
+    atom = false;
+    int size = game.getSize();
+    size *= size;
+    int i = 0;
+    for (;i < numOfThreads; i++) {
+        Game* gameTmp = new Game(game.gameCopy());
+        game.swapPieces(0,i);
+        tabOfSolver.emplace_back(ParallelResolver(*gameTmp, &atom));
+        vector<Piece *> list = game.getPieces();
+        addThreadPool(new thread(&ParallelResolver::initializerSolver,tabOfSolver.back()));
     }
-    joinThreads();
+    while (!atom) {
+        for (thread* t : threadPool) {
+            if (t->joinable()){
+                t->join();
+                Game* gameTmp = new Game(game.gameCopy());
+                game.swapPieces(0,i);
+                tabOfSolver.emplace_back(ParallelResolver(*gameTmp, &atom));
+                vector<Piece *> list = game.getPieces();
+                t = new thread(&ParallelResolver::initializerSolver,tabOfSolver.back());
+                i++;
+            }
+        }
+    }
+    killThreads();
 
 }
 
+void ThreadPool::initializeSolverShuffle(Game game) {
+    vector<ParallelResolver> tabOfSolver;
+    atom = new atomic<bool>();
+    atom = false;
+    int size = game.getSize();
+    size *= size;
+    int i = 0;
+    for (;i < numOfThreads; i++) {
+        Game* gameTmp = new Game(game.gameCopy());
+        gameTmp->shufflePieces();
+        tabOfSolver.emplace_back(ParallelResolver(*gameTmp, &atom));
+        vector<Piece *> list = game.getPieces();
+        addThreadPool(new thread(&ParallelResolver::initializerSolverShuffled,tabOfSolver.back()));
+    }
+    while (!atom) {
+        for (thread* t : threadPool) {
+            if (t->joinable()){
+                t->join();
+                Game* gameTmp = new Game(game.gameCopy());
+                gameTmp->shufflePieces();
+                tabOfSolver.emplace_back(ParallelResolver(*gameTmp, &atom));
+                vector<Piece *> list = game.getPieces();
+                t = new thread(&ParallelResolver::initializerSolverShuffled,tabOfSolver.back());
+                i++;
+            }
+        }
+    }
+    killThreads();
+
+}
 

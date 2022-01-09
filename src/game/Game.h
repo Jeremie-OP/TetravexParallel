@@ -25,6 +25,8 @@ public:
 
     vector<Piece*> getPieces() { return listePiece;};
     void swapPieces(int x, int y);
+
+    void shufflePieces();
 };
 
 #endif //TETRAVEX_GAME_H
