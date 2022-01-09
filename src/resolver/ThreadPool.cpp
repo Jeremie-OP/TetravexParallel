@@ -24,10 +24,10 @@ void ThreadPool::killThreads() {
 }
 
 void ThreadPool::initializeSolver(Game game) {
+    vector<SequentialResolver> tabOfSolver;
     for (int i=0 ; i < numOfThreads; i++) {
-        Game tmp = game.gameCopy();
-        auto* solver = new SequentialResolver(tmp);
-        addThreadPool(new thread(&SequentialResolver::resolveP,solver, tmp ,0, 0));
+        tabOfSolver.emplace_back(SequentialResolver(game.gameCopy()));
+        addThreadPool(new thread(&SequentialResolver::resolve,tabOfSolver.back(), i, 0));
     }
     joinThreads();
 

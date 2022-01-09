@@ -19,7 +19,7 @@ class SequentialResolver {
     public:
         SequentialResolver(Game _game);
         bool resolve(int numberOfPlayedPiece, int newI);
-        bool resolveP(Game &game, int numberOfPlayedPiece, int newI);
+        bool resolveP(Game* game, int numberOfPlayedPiece, int newI);
 };
 
 

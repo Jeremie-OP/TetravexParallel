@@ -16,8 +16,12 @@ void Game::removePiece() {
 Game Game::gameCopy() {
     Game gameCopy(this->getSize());
     for (Piece* p : this->listePiece) {
-        gameCopy.addPiece(p);
+        gameCopy.addPiece(new Piece(p->getLeft(), p->getTop(), p->getRight(), p->getBot()));
     }
     return gameCopy;
+}
+
+void Game::swapPieces(int x, int y) {
+    swap(listePiece[x], listePiece[y]);
 }
 
