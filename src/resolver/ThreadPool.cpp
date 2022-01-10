@@ -17,13 +17,6 @@ void ThreadPool::joinThreads() {
         t->join();
     }
 }
-void ThreadPool::killThreads() {
-    for(thread* t: threadPool) {
-        t->~thread();
-    }
-}
-
-
 
 void ThreadPool::initializeSolver(Game game) {
     vector<ParallelResolver> tabOfSolver;
@@ -66,18 +59,7 @@ void ThreadPool::initializeSolverShuffle(Game game) {
         tabOfSolver.emplace_back(ParallelResolver(*gameTmp, &atom));
         addThreadPool(new thread(&ParallelResolver::initializerSolverShuffled,tabOfSolver.back()));
     }
-    while (!atom) {
-        for (thread* t : threadPool) {
-            if (t->joinable()){
-                t->join();
-                Game* gameTmp = new Game(game.gameCopy());
-                gameTmp->shufflePieces();
-                tabOfSolver.emplace_back(ParallelResolver(*gameTmp, &atom));
-                t = new thread(&ParallelResolver::initializerSolverShuffled,tabOfSolver.back());
-                i++;
-            }
-        }
-    }
+    joinThreads();
 
 }
 

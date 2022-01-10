@@ -6,18 +6,19 @@
 #include "test/ImportGame.h"
 #include "resolver/SequentialResolver.h"
 #include "resolver/ThreadPool.h"
-#include "resolver/ParallelResolver.h"
 
 using namespace std;
 
 int main() {
     cout << "Bienvenu dans le programme de Tetravex" << endl;
-    Game game = ImportGame().readFile("../../test/8x8.txt");
-//    SequentialResolver* solver = new SequentialResolver(game);
-//    solver->resolveP(&game,0,0);
-    ThreadPool* threadPool = new ThreadPool();
+    Game game = ImportGame().readFile("../../test/7x7.txt");
+    cout << "Sequentiel:" << endl;
+    SequentialResolver* solver = new SequentialResolver(game);        //Sequential
+    solver->resolve(0,0);
+    ThreadPool* threadPool = new ThreadPool();                          //Parallel
+    cout << endl <<"Parellele shuffle :" << endl;
     threadPool->initializeSolverShuffle(game);
-//    ParallelResolver solver(game);
-//    solver.initializerSolver(0);
+    cout << endl <<"Parellele distribué :" << endl;
+    threadPool->initializeSolver(game);
     return 0;
 }

@@ -18,7 +18,7 @@ bool ParallelResolver::solver(vector<Piece*> &listPiece, int numberOfPlayedPiece
     if (numberOfPlayedPiece == 1) loop++;
     if (size <= numberOfPlayedPiece) {
         *atom = true;
-        cout << loop << " boucles realisés" << endl;
+        //cout << loop << " boucles realisés" << endl;
         cout << "resolved in " << chrono::duration_cast<chrono::duration<double>>(chrono::high_resolution_clock::now() - start).count() << "s"<<endl;;  //on affiche le temps
         game.showBoard();  //on affiche la board
         return true;    //on sort de la recursivité
@@ -46,7 +46,7 @@ bool ParallelResolver::solverShuffled(vector<Piece*> &listPiece, int numberOfPla
     if (numberOfPlayedPiece == 1) loop++;
     if (size <= numberOfPlayedPiece) {
         *atom = true;
-        cout << loop << " boucles realisés" << endl;
+        //cout << loop << " boucles realisés" << endl;
         cout << "resolved in " << chrono::duration_cast<chrono::duration<double>>(chrono::high_resolution_clock::now() - start).count() << "s"<<endl;;  //on affiche le temps
         game.showBoard();  //on affiche la board
         return true;    //on sort de la recursivité
@@ -66,10 +66,6 @@ bool ParallelResolver::solverShuffled(vector<Piece*> &listPiece, int numberOfPla
         } else i++;
     }
     return false;
-}
-
-void ParallelResolver::launch(Game game, vector<Piece*> &listPiece, int i) {
-    solver(listPiece,i,0);
 }
 
 void ParallelResolver::initializerSolver() {

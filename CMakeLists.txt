@@ -5,7 +5,7 @@ include(CTest)
 enable_testing()
 
 set(CMAKE_CXX_STANDARD 14)
-set(CMAKE_CXX_FLAGS "-O3 -Wall -Wextra")
+set(CMAKE_CXX_FLAGS "-O3 -Wall -Wextra -lpthread")
 
 # add_compile_options(-pthread)
 

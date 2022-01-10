@@ -23,8 +23,6 @@ public:
     bool solver(vector<Piece*> &listPiece , int numberOfPlayedPiece, int newI);
     chrono::high_resolution_clock::time_point start;
 
-    void launch(Game game, vector<Piece *> &listPiece, int i);
-
     void initializerSolverShuffled();
 
     bool solverShuffled(vector<Piece *> &listPiece, int numberOfPlayedPiece, int newI);

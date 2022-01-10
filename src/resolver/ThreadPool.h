@@ -19,7 +19,6 @@ public:
     ThreadPool();
     void addThreadPool(thread* t);
     void joinThreads();
-    void killThreads();
 
     void initializeSolver(Game game);
 
