@@ -9,9 +9,10 @@
 
 using namespace std;
 
-int main() {
+int main(int argc, char *argv[]){
     cout << "Bienvenu dans le programme de Tetravex" << endl;
-    Game game = ImportGame().readFile("../../test/7x7.txt");
+    cout << "Chargement du fichier: " << argv[1] << endl;
+    Game game = ImportGame().readFile(argv[1]);
     cout << "Sequentiel:" << endl;
     SequentialResolver* solver = new SequentialResolver(game);        //Sequential
     solver->resolve(0,0);

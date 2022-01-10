@@ -52,8 +52,7 @@ void ThreadPool::initializeSolverShuffle(Game game) {
     atom = false;
     int size = game.getSize();
     size *= size;
-    int i = 0;
-    for (;i < numOfThreads; i++) {
+    for (int i = 0;i < numOfThreads; i++) {
         Game* gameTmp = new Game(game.gameCopy());
         gameTmp->shufflePieces();
         tabOfSolver.emplace_back(ParallelResolver(*gameTmp, &atom));
